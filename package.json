@@ -1,46 +1,24 @@
 {
   "name": "web3",
   "namespace": "ethereum",
-  "version": "0.19.0",
-  "description": "Ethereum JavaScript API, middleware to talk to a ethereum node over RPC",
-  "main": "./index.js",
+  "version": "1.0.0-beta.11",
+  "description": "Ethereum JavaScript API",
+  "license": "LGPL-3.0",
+  "main": "./src/index.js",
   "directories": {
-    "lib": "./lib"
-  },
-  "dependencies": {
-    "bignumber.js": "git+https://github.com/debris/bignumber.js.git#94d7146671b9719e00a09c29b01a691bc85048c2",
-    "crypto-js": "^3.1.4",
-    "utf8": "^2.1.1",
-    "xhr2": "*",
-    "xmlhttprequest": "*"
-  },
-  "browser": {
-    "xmlhttprequest": "./lib/utils/browser-xhr.js"
-  },
-  "devDependencies": {
-    "bower": ">=1.4.1",
-    "browserify": ">=10.0",
-    "chai": "^3.0.0",
-    "coveralls": "^2.11.2",
-    "del": ">=2.0.2",
-    "exorcist": "^0.4.0",
-    "gulp": ">=3.9.0",
-    "gulp-jshint": ">=1.5.0",
-    "gulp-rename": ">=1.2.0",
-    "gulp-replace": "^0.5.3",
-    "gulp-streamify": "0.0.5",
-    "gulp-uglify": ">=1.2.0",
-    "istanbul": "^0.4.4",
-    "jshint": ">=2.5.0",
-    "mocha": ">=2.3.3",
-    "sandboxed-module": "^2.0.2",
-    "vinyl-source-stream": "^1.1.0"
+    "lib": "./src",
+    "doc": "./doc",
+    "test": "./test"
   },
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "build": "gulp",
+    "build-all": "gulp all",
+    "publish": "lerna publish --skipp-git --force-publish; gulp; npm publish;",
     "watch": "gulp watch",
-    "lint": "jshint *.js lib",
-    "test": "mocha",
+    "docs": "cd docs; make html;",
+    "lint": "jshint *.js packages",
+    "test": "mocha; jshint *.js packages",
     "test-coveralls": "istanbul cover _mocha -- -R spec && cat coverage/lcov.info | coveralls --verbose"
   },
   "repository": {
@@ -49,40 +27,68 @@
   },
   "homepage": "https://github.com/ethereum/web3.js",
   "bugs": {
-    "url": "https://github.com/ethereum/web3.js/issues"
+    "url    ": "https://github.com/ethereum/web3.js/issues"
   },
   "keywords": [
-    "ethereum",
-    "javascript",
+    "Ethereum",
+    "JavaScript",
     "API"
   ],
-  "author": "ethdev.com",
+  "author": "ethereum.org",
   "authors": [
     {
-      "name": "Marek Kotewicz",
-      "email": "marek@ethdev.com",
-      "url": "https://github.com/debris"
-    },
-    {
       "name": "Fabian Vogelsteller",
-      "email": "fabian@ethdev.com",
+      "email": "fabian@ethereum.org",
       "homepage": "http://frozeman.de"
     },
     {
+      "name": "Marek Kotewicz",
+      "email": "marek@parity.io",
+      "url": "https://github.com/debris"
+    },
+    {
       "name": "Marian Oancea",
-      "email": "marian@ethdev.com",
       "url": "https://github.com/cubedro"
     },
     {
       "name": "Gav Wood",
-      "email": "g@ethdev.com",
+      "email": "g@parity.io",
       "homepage": "http://gavwood.com"
     },
     {
       "name": "Jeffery Wilcke",
-      "email": "jeff@ethdev.com",
+      "email": "jeffrey.wilcke@ethereum.org",
       "url": "https://github.com/obscuren"
     }
   ],
-  "license": "LGPL-3.0"
+  "dependencies": {
+      "lerna": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "bignumber.js": "^4.0.0",
+    "bn.js": "^4.11.6",
+    "bower": ">=1.4.1",
+    "browserify": "^14.4.0",
+    "chai": "^3.0.0",
+    "coveralls": "^2.11.2",
+    "crypto-js": "^3.1.4",
+    "del": ">=2.0.2",
+    "ethereumjs-wallet": "^0.6.0",
+    "ethjs-signer": "^0.1.1",
+    "exorcist": "^0.4.0",
+    "gulp": ">=3.9.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^3.0.0",
+    "istanbul": "^0.4.4",
+    "jshint": ">=2.5.0",
+    "mocha": ">=2.3.3",
+    "sandboxed-module": "^2.0.2",
+    "underscore": "^1.8.3",
+    "vinyl-source-stream": "^1.1.0"
+  }
 }

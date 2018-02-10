@@ -3,40 +3,23 @@ var assert = chai.assert;
 var SandboxedModule = require('sandboxed-module');
 
 SandboxedModule.registerBuiltInSourceTransformer('istanbul');
-var HttpProvider = SandboxedModule.require('../lib/web3/httpprovider', {
+var HttpProvider = SandboxedModule.require('../packages/web3-providers-http', {
     requires: {
         'xhr2': require('./helpers/FakeXHR2'),
-        'xmlhttprequest': require('./helpers/FakeXMLHttpRequest')
+        // 'xmlhttprequest': require('./helpers/FakeXMLHttpRequest')
     },
     singleOnly: true
 });
 
-describe('lib/web3/httpprovider', function () {
+describe('web3-providers-http', function () {
     describe('send', function () {
-        it('should send basic request', function () {
-            var provider = new HttpProvider();
-            var result = provider.send({});
-
-            assert.equal(typeof result, 'object');
-        });
-    });
-
-    describe('sendAsync', function () {
         it('should send basic async request', function (done) {
             var provider = new HttpProvider();
 
-            provider.sendAsync({}, function (err, result) {
+            provider.send({}, function (err, result) {
                 assert.equal(typeof result, 'object');
                 done();
             });
-        });
-    });
-
-    describe('isConnected', function () {
-        it('should return a boolean', function () {
-            var provider = new HttpProvider();
-
-            assert.isBoolean(provider.isConnected());
         });
     });
 });
